@@ -11,8 +11,8 @@
  */
 class Train {
     private int numberOfSeats;
-    private int trainID; //train id increments automatically and is also the count of trains
-    private static int trainCount;
+    private int trainID; 
+    private static int trainCount = 0;
     public Train(int id, int numberOfSeats) {
         this.numberOfSeats = numberOfSeats;
         trainID = id;
