@@ -1,7 +1,10 @@
-package Route;
+package routePackage;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+/**
+ * Authors: Eyad Mostafa // Menna Magdy
+ */
 
 
 public class Route {
@@ -17,15 +20,15 @@ public class Route {
     public Route(int routeID, String[] stations) {
         this.routeID = routeID;
         int time;
-        for(int i = 0; i < stations.length; i++) {
+        for(int i = 0; i < (stations.length - 1); i++) {
             stoppingStations.add(stations[i]);
         }
-        for(int i = 1; i < stations.length; i++) {
+        for(int i = 1; i < (stations.length - 1); i++) {
             int randDist = new Random().nextInt(15);
             distance.add(randDist);
         }
-        for(int i = 1; i < stations.length; i++) {
-            time = distance.get(i) / trainSpeed;
+        for(int i = 1; i < (stations.length - 1); i++) {
+            time = distance.get(i - 1) / trainSpeed;
             runningTime.add(time);
         }
         originStation = stoppingStations.get(0);
@@ -43,6 +46,7 @@ public class Route {
         for(int i = 0; i < endIndex - 1; i++) {
             time2Stations += runningTime.get(i);
         }
+        input.close();
         return time2Stations;
     }
     public void setRouteID(int id) {

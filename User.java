@@ -4,7 +4,7 @@
 *  @Author Eyad Mostafa
 *
 */
-
+package userPackage;
 public class User{
     private String username;
     private String password;

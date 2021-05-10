@@ -1,4 +1,5 @@
-class Ticket{
+
+public class Ticket{
     
     private int seatNumber;
     private double departureTime;
@@ -8,13 +9,13 @@ class Ticket{
     private Trip tripObj;
     private double fare;
 
-    public Ticket(int seatNumber, double departureTime, Trip tripInput, String origin, String end) {
+    public Ticket(int seatNumber, Trip tripInput, String end) {
             tripObj = tripInput;
-            passengerDeparture = origin;
+            passengerDeparture = tripObj.getTripOrigin();
             passengerArrival = end;
             Route r2 = tripObj.getRoute();
             this.seatNumber = seatNumber;
-            this.departureTime = departureTime;
+            this.departureTime = tripObj.getTripBegin();
             this.arrivalTime = departureTime + r2.getTimeBet2Stations(passengerDeparture, passengerArrival);
             if(r2.getRouteID() == 1) {
                 fare = 10;
@@ -28,6 +29,14 @@ class Ticket{
             else {
                 System.out.println("Invalid route id entered");
             }
+    }
+    public Ticket() {
+        seatNumber = 0;
+        departureTime = 0.0;
+        passengerDeparture = "";
+        passengerArrival = "";
+        arrivalTime = 0.0;
+        fare = 0.0;
     }
     public void setSeatNumber(int seatNum) {
         seatNumber = seatNum;

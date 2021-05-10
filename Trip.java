@@ -1,7 +1,12 @@
-package project;
-
+package tripPackage;
+import routePackage.Route;
+import trainPack.Train;
+/**
+ * Authors: Eyad Mostafa // Mostafa Gado
+ */
 import java.util.ArrayList;
 public class Trip {
+
     int tripID;
     Route routeObj;
     enum states{empty,reserved};
@@ -11,18 +16,17 @@ public class Trip {
     double tripStartTime,tripEndTime;
     
     
-    public Trip(int id,String origin, String end, Route routeInput,  String tripEnd, double depTime,
-     double arrivalTime,Train trainInput) {
+    public Trip(int id, Route routeInput, int depTime, Train trainInput) {
         this.tripID = id;
         routeObj = routeInput;
+        trainObj = trainInput;
         for(int i = 0; i < trainObj.getNumberOfSeats(); i++) {
             seats.add(states.empty);
         }
-        trainObj = trainInput;
-        tripOriginStation = origin;
-        tripEndStation = end;
+        tripOriginStation = routeObj.getOriginStation();
+        tripEndStation = routeObj.getEndStation();
         tripStartTime = depTime;
-        tripEndTime = arrivalTime;
+        tripEndTime = tripStartTime + routeObj.getTimeBet2Stations(routeObj.getOriginStation(), routeObj.getEndStation());
 
         
     }
@@ -39,6 +43,9 @@ public class Trip {
     }
     public void reserveSeat(int seatNumber) {
         seats.add(seatNumber - 1, states.reserved);
+    }
+    public void emptySeat(int seatNumber) {
+        seats.add(seatNumber - 1, states.empty);
     }
     public void setTrain(Train trainInput) {
         trainObj = trainInput;
@@ -78,14 +85,14 @@ public class Trip {
         return tripOriginStation;
     }
     
-    public String getTripEnd() {
+    public String getTripArrivalStation() {
         return tripEndStation;
         
     }
-    public double getTripBegin(String startTime) {
+    public double getTripBegin() {
         return tripStartTime;
     }
-    public double getTripEnd(String end) {
+    public double getTripEnd() {
         return tripEndTime;
     }
 }

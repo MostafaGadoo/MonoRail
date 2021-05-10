@@ -1,22 +1,11 @@
+package trainPack;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * Author: Mostafa Gado
- */
-class Train {
+public class Train {
     private int numberOfSeats;
-    private int trainID; 
-    private static int trainCount = 0;
+    private int trainID;
     public Train(int id, int numberOfSeats) {
         this.numberOfSeats = numberOfSeats;
         trainID = id;
-        trainCount++;
     }
     public Train() {
         numberOfSeats = 0;
@@ -38,10 +27,5 @@ class Train {
     public int getTrainID() {
         return trainID;
     }
-    public static int getTrainCount() {
-        return trainCount;
-    }
-    
-
 }
 

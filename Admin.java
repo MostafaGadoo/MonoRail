@@ -4,7 +4,6 @@
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
 */
-package project;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,29 +13,28 @@ public class Admin extends User {
         
     }
     
-    private static ArrayList<Train> arr;
+    private static ArrayList<Train> arr = new ArrayList<>();
     
-    public void AddTrain(int trainNumber, int numberOfSeats){
-        Train T1 = new Train(trainNumber, numberOfSeats);
-        arr.add(T1);
+    public void addTrain(int trainNumber, int numberOfSeats){
+        Train train1 = new Train(trainNumber, numberOfSeats);
+        arr.add(train1);
+        System.out.println("Train has been added successfully with id number" + trainNumber);
     }
     
     
     
-    public Train RemoveTrain(int trainID){
+    public Train removeTrain(int trainID){
         Train T = new Train();
         for(int i = 0;i < arr.size(); i++){
             T = arr.get(i);
             if(T.getTrainID() == trainID)
-            
-            
             return arr.remove(i);
         }
         return null;
     }
     
     
-    public void UpdateTrain(int trainID){
+    public void updateTrain(int trainID){
         Scanner S1 = new Scanner(System.in);
         Train T = new Train();
         int seatNo;
@@ -49,6 +47,7 @@ public class Admin extends User {
                 arr.add(i , T);
             }
         }
+        S1.close();
     }
     public void changeAdminPassword(String password) {
         setPassword(password);
