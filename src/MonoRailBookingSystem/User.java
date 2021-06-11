@@ -5,16 +5,17 @@
  */
 package MonoRailBookingSystem;
 
-/**
- *
- * @author Mostafa Gado
- */
-public class User{
+import java.util.ArrayList;
+
+
+public class User {
     private String username;
     private String password;
     private String firstName;
     private String lastName;
     private String accountType;
+     ArrayList<Admin> admins ;
+    
     public User(String username, String password, String fname, String lname) {
         this.username = username;
         this.password = password;
@@ -28,6 +29,12 @@ public class User{
         firstName = "";
         lastName = "";
         accountType = "";
+        admins=new ArrayList<Admin> ();
+         admins.add(new Admin("ahmed","1234","Ahmed","Adel"));
+         admins.add(new Admin("Mostafa","12345","Mostafa","Gado"));
+         admins.add(new Admin("Sana","3333","Sana","Darweesh"));
+         admins.add(new Admin("Menna","4444","Ahmed","Magdy"));
+         admins.add(new Admin("Eyad","123457","Eyad","Mostafa"));
     }
     public void setUsername(String username) {
         this.username = username;

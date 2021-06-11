@@ -1,24 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package MonoRailBookingSystem;
 
-/**
- *
- * @author Mostafa Gado
- */
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class Admin extends User {
+     
+         ArrayList<Train> arr ;
+    public Admin() {
+         arr=new ArrayList<Train>();
+         arr.add(new Train(123,50));
+         arr.add(new Train(551,40));
+         arr.add(new Train(600,45));
+         arr.add(new Train(225,50));
+         arr.add(new Train(451,50));
+    }
+    
     public Admin(String username, String password, String firstName, String lastName) {
         super(username, password, firstName, lastName);
         
     }
     
-    private static ArrayList<Train> arr = new ArrayList<>();
-    
+ 
+ 
     public void addTrain(int trainNumber, int numberOfSeats){
         Train train1 = new Train(trainNumber, numberOfSeats);
         arr.add(train1);
@@ -52,6 +55,18 @@ public class Admin extends User {
             }
         }
         S1.close();
+    }
+    public void Search(String username){
+         Admin a=new Admin();
+        for(int i=0;i<admins.size();i++){
+            a=admins.get(i);
+            if(a.getUsername()== username){
+                System.out.println("Admin account is found");
+            }
+            else{
+                System.out.println("Account not Found");
+            }
+        }
     }
     public void Report(Route R,Ticket T){
        if(R.getRouteID()==1){
