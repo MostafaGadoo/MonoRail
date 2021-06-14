@@ -5,11 +5,13 @@
  */
 package MonoRailBookingSystem;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Mostafa Gado
  */
-public class Train {
+public class Train implements Serializable{
     private int numberOfSeats;
     private int trainID;
     public Train(int id, int numberOfSeats) {
@@ -36,5 +38,13 @@ public class Train {
     public int getTrainID() {
         return trainID;
     }
+
+    @Override
+    public String toString() {
+        return "Train{" + "numberOfSeats=" + numberOfSeats + ", trainID=" + trainID + '}';
+    }
+    
+    
+    
 }
 

@@ -9,10 +9,11 @@ package MonoRailBookingSystem;
  *
  * @author Mostafa Gado
  */
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-public class Route {
+public class Route implements Serializable {
     //assuming speed of every train is constant equals 60 km/h
     private int routeID;
     private ArrayList <String> stoppingStations = new ArrayList<>();
@@ -22,17 +23,18 @@ public class Route {
     private String originStation;
     private String endStation;
     
-    public Route(int routeID, String[] stations) {
+    public Route(int routeID, ArrayList<String> stations) {
         this.routeID = routeID;
         int time;
-        for(int i = 0; i < (stations.length - 1); i++) {
-            stoppingStations.add(stations[i]);
+        for(int i = 0; i < (stations. size()- 1); i++) {
+            stoppingStations.add(stations.get(i));
         }
-        for(int i = 1; i < (stations.length - 1); i++) {
+        for(int i = 1; i < (stations.size() - 1); i++) {
             int randDist = new Random().nextInt(15);
+            randDist += 2;
             distance.add(randDist);
         }
-        for(int i = 1; i < (stations.length - 1); i++) {
+        for(int i = 1; i < (stations.size() - 1); i++) {
             time = distance.get(i - 1) / trainSpeed;
             runningTime.add(time);
         }
@@ -41,14 +43,12 @@ public class Route {
     }
     public int getTimeBet2Stations(String origin, String end) {
         Scanner input = new Scanner(System.in);
-        while(origin != stoppingStations.get(0)) {
-            System.out.println("The station name you entered isn't the origin of this route please try again");
-            origin = input.nextLine();
-        }
         int endIndex;
+        int startIndex;
         int time2Stations = 0;
         endIndex = stoppingStations.indexOf(end);
-        for(int i = 0; i < endIndex - 1; i++) {
+        startIndex = stoppingStations.indexOf(origin);
+        for(int i = startIndex; i < endIndex; i++) {
             time2Stations += runningTime.get(i);
         }
         input.close();
@@ -57,10 +57,8 @@ public class Route {
     public void setRouteID(int id) {
         routeID = id;
     }
-    public void setStoppingStations(String[] stations) {
-        for(int i = 0; i < stations.length; i++) {
-            stoppingStations.add(stations[i]);
-        }
+    public void setStoppingStations(ArrayList<String> stations) {
+        stoppingStations = stations;
     }
     public void setDistances(String[] stations) {
 

@@ -9,42 +9,37 @@ package MonoRailBookingSystem;
  *
  * @author Mostafa Gado
  */
+import java.io.Serializable;
 import java.util.ArrayList;
-public class Trip {
+public class Trip implements Serializable{
 
+    int trainId;
     int tripID;
-    Route routeObj;
     enum states{empty,reserved};
     private static ArrayList<states> seats = new ArrayList<>();
     Train trainObj;
     String tripOriginStation,tripEndStation;
-    double tripStartTime,tripEndTime;
+    int tripStartTime,tripEndTime;
     
     
-    public Trip(int id, Route routeInput, int depTime, Train trainInput) {
+    public Trip(int id, String origin, String endStation, int depTime, int endTime, int trainId) {
         this.tripID = id;
-        routeObj = routeInput;
-        trainObj = trainInput;
         for(int i = 0; i < trainObj.getNumberOfSeats(); i++) {
             seats.add(states.empty);
         }
-        tripOriginStation = routeObj.getOriginStation();
-        tripEndStation = routeObj.getEndStation();
+        tripOriginStation = origin;
+        tripEndStation = endStation;
         tripStartTime = depTime;
-        tripEndTime = tripStartTime + routeObj.getTimeBet2Stations(routeObj.getOriginStation(), routeObj.getEndStation());
+        tripEndTime = endTime;
+        this.trainId = trainId;
 
         
     }
     public void SetTripID(int id) {
         tripID = id;
     }
-    public void setRoute(Route routeInput) {
-        routeObj = routeInput;
-    }
-    public void setSeatStates() {
-        for(int i = 0; i < trainObj.getNumberOfSeats(); i++) {
-            seats.add(states.empty);
-        }
+    public void setTrainId(int trainId) {
+        this.trainId = trainId;
     }
     public void reserveSeat(int seatNumber) {
         seats.add(seatNumber - 1, states.reserved);
@@ -63,25 +58,27 @@ public class Trip {
         tripEndStation = end;
         
     }
-    public void setTripBegin(double startTime) {
+    public void setTripBegin(int startTime) {
         tripStartTime = startTime;
     }
-    public void setTripEndTime(double end) {
+    public void setTripEndTime(int end) {
         tripEndTime = end;
     }
     public int getTripID() {
         return tripID;
     }
-    public Route getRoute() {
-        return routeObj;
+    public int getTrainId() {
+        return trainId;
     }
-    public void getEmptySeats() {
-        System.out.println("The empty seats are");
+    public ArrayList getEmptySeats() {
+
+        ArrayList<Integer> emptySeats = new ArrayList<Integer>(); 
         for(int i = 0; i < trainObj.getNumberOfSeats(); i++) {
             if(seats.get(i) == states.empty) {
-                System.out.println(i + 1 + ",");
+                emptySeats.add(i + 1);
             }
         }
+        return emptySeats;
     }
     public Train getTrain() {
         return trainObj;
@@ -94,10 +91,10 @@ public class Trip {
         return tripEndStation;
         
     }
-    public double getTripBegin() {
+    public int getTripBegin() {
         return tripStartTime;
     }
-    public double getTripEnd() {
+    public int getTripEnd() {
         return tripEndTime;
     }
 }
